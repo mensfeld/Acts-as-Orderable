@@ -1,0 +1,6 @@
+pkg
+doc
+*.gem
+.redcar
+**.swp
+.bundle/

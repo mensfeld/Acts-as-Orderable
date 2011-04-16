@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('acts_as_random', '0.1.0') do |p|
+Echoe.new('acts_as_orderable', '0.1.0') do |p|
   p.description    = "Rails gem allowing ActiveRecord models to have order and to move them up and down"
   p.url            = "https://github.com/mensfeld/Acts-as-Orderable"
   p.author         = "Maciej Mensfeld"

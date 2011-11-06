@@ -21,8 +21,10 @@ module Acts
 
         parent_column = options.delete("tree_column")
         # Determine tree column (first from param - else check default acts_as_tree "parent_id")
-        unless parent_column
-          parent_column = 'parent_id' if self.column_names.include? 'parent_id'
+        if self.table_exists?
+          unless parent_column
+            parent_column = 'parent_id' if self.column_names.include? 'parent_id'
+          end
         end
 
         # Set class attributes

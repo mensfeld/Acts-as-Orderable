@@ -1,2 +1,4 @@
 = Version 0.1.0
 * Gem existence started
+= Version 0.1.1
+* table_exists? fix

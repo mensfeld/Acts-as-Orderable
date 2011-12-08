@@ -35,10 +35,11 @@ module Acts
 
         # Define methods for assigning new parent - when we change parent
         # we need to be first or last element (according to new_el_pos)
-        self.send(:define_method, "#{parent_column}=".to_sym) do |new_parent|
+        self.send(:define_method, :"#{parent_column}=") do |new_parent|
+          old_parent = self.send(:"#{parent_column}")
           super new_parent
           # If object exist (been saved and we're just changing its parent)
-          init_me! unless self.new_record?
+          init_me! unless self.new_record? || old_parent == new_parent
         end if parent_column
       end
     end
@@ -108,7 +109,7 @@ module Acts
         self.save
       end
 
-      # Builds query part used to fetch only elements from uor node (or do nothing)
+      # Builds query part used to fetch only elements from your node (or do nothing)
       def search_node_query(init_end = true)
         p_c = self.class.parent_column
         # If parent exists - fetch our parent_id and put it into query

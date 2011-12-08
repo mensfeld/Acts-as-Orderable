@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{acts_as_orderable}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Maciej Mensfeld}]
-  s.date = %q{2011-11-06}
+  s.date = %q{2011-12-08}
   s.description = %q{Rails gem allowing ActiveRecord models to have order and to move them up and down}
   s.email = %q{maciej@mensfeld.pl}
   s.extra_rdoc_files = [%q{CHANGELOG.rdoc}, %q{README.md}, %q{lib/acts_as_orderable.rb}]

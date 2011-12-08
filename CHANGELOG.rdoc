@@ -2,3 +2,5 @@
 * Gem existence started
 = Version 0.1.1
 * table_exists? fix
+= Version 0.1.2
+* Fix for assigning same parent - should not change order

@@ -121,7 +121,6 @@ describe CoolElement do
       a.element_order.should be < d.element_order
     end
   end
-
 end
 
 describe CoolerElement do
@@ -309,6 +308,24 @@ describe WayCoolerElement do
       aa.element_order.should == 2
       ab.element_order.should == 1
       ac.element_order.should == 2
+    end
+  end
+
+  context "when sending save root element" do
+    it "should not interfere with children order" do
+      a = subject.create
+      aa = a.children.create
+      ab = a.children.create
+      a.reload; aa.reload; ab.reload
+
+      olda = aa.element_order
+      oldb = ab.element_order
+
+      aa.update_attributes({:parent_id => aa.parent_id})
+      aa.reload
+      ab.reload
+      aa.element_order.should == olda
+      ab.element_order.should == oldb
     end
   end
 

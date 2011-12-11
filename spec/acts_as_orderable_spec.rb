@@ -327,6 +327,27 @@ describe WayCoolerElement do
       aa.element_order.should == olda
       ab.element_order.should == oldb
     end
+  
+    context "and we send it as a string not as an integer" do
+      it "should not interfere with children order" do
+        a = subject.create
+        aa = a.children.create
+        ab = a.children.create
+        a.reload; aa.reload; ab.reload
+
+        olda = aa.element_order
+        oldb = ab.element_order
+
+        aa.update_attributes({:parent_id => "#{aa.parent_id}"})
+        aa.reload
+        ab.reload
+        aa.element_order.should == olda
+        ab.element_order.should == oldb
+      end
+    end
+
   end
+
+  
 
 end

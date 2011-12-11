@@ -39,7 +39,7 @@ module Acts
           old_parent = self.send(:"#{parent_column}")
           super new_parent
           # If object exist (been saved and we're just changing its parent)
-          init_me! unless self.new_record? || old_parent == new_parent
+          init_me! unless self.new_record? || old_parent.to_i == new_parent.to_i
         end if parent_column
       end
     end

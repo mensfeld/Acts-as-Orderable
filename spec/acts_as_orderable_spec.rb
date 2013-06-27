@@ -11,6 +11,7 @@ class CoolerElement < ActiveRecord::Base
 end
 
 class WayCoolerElement < ActiveRecord::Base
+  include ActsAsTree
   acts_as_tree
   acts_as_orderable
 end

@@ -4,6 +4,7 @@ MIT-LICENSE
 Manifest
 README.md
 Rakefile
+acts_as_orderable.gemspec
 init.rb
 lib/acts_as_orderable.rb
 spec/acts_as_orderable_spec.rb

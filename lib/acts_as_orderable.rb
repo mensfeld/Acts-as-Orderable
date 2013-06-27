@@ -10,7 +10,7 @@ module Acts
       # Should new element be first || last
       def acts_as_orderable(*sources)
         class_eval <<-END
-          scope :ordered, order('element_order ASC')
+          scope :ordered, ->{ order('element_order ASC') }
           after_create :init_me!
           include Acts::AsOrderable::InstanceMethods
         END
@@ -71,7 +71,7 @@ module Acts
       def init_me!
         self.element_order = 0
         if self.class.new_element_position == :first
-          self.class.where("id != #{self.id} #{search_node_query}").all.each do |el|
+          self.class.where("id != #{self.id} #{search_node_query}").load.each do |el|
             el.element_order += 1
             el.save
           end

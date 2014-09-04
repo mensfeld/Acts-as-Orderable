@@ -10,7 +10,7 @@ module Acts
       # Should new element be first || last
       def acts_as_orderable(*sources)
         class_eval <<-END
-          scope :ordered, ->{ order('element_order ASC') }
+          scope :ordered, ->{ order(:element_order) }
           after_create :init_me!
           include Acts::AsOrderable::InstanceMethods
         END

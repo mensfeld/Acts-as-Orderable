@@ -8,6 +8,7 @@ Echoe.new('acts_as_orderable', '0.1.4') do |p|
   p.url            = "https://github.com/mensfeld/Acts-as-Orderable"
   p.author         = "Maciej Mensfeld"
   p.email          = "maciej@mensfeld.pl"
+  p.license        = 'MIT'
   p.ignore_pattern = ["tmp/*", "script/*"]
   p.development_dependencies = ["rspec >=2.0.0", "activerecord >=4.0.0"]
 end

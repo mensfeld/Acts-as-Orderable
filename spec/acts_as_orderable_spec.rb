@@ -121,6 +121,20 @@ describe CoolElement do
       a.element_order.should be < c.element_order
       a.element_order.should be < d.element_order
     end
+
+    it "should re arrange the remaining items " do
+      a=subject.create; b=subject.create; c=subject.create; d=subject.create
+
+      a.reload; b.reload; c.reload; d.reload
+
+      b.destroy
+
+      a.reload; c.reload; d.reload
+
+      a.element_order.should eq(0)
+      c.element_order.should eq(1)
+      d.element_order.should eq(2)
+    end
   end
 end
 

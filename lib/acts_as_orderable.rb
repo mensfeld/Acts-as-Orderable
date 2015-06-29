@@ -11,7 +11,8 @@ module Acts
       def acts_as_orderable(*sources)
         class_eval <<-END
           scope :ordered, ->{ order(:element_order) }
-          after_create :init_me!
+          after_create  :init_me!
+          after_destroy :re_arrange_list!
           include Acts::AsOrderable::InstanceMethods
         END
 
@@ -49,7 +50,7 @@ module Acts
 
       # Fetches previous element - if there's no previous elements - return nil
       def previous
-          self.class.where("element_order < #{self.element_order} #{search_node_query}").order("element_order DESC").limit(1).first
+        self.class.where("element_order < #{self.element_order} #{search_node_query}").order("element_order DESC").limit(1).first
       end
 
       # Fetches previous element - if there's no previous elements - return nil
@@ -63,6 +64,14 @@ module Acts
 
       def move_down(steps = 1)
         move(-steps)
+      end
+
+      def previous_items
+        self.class.where("element_order < #{self.element_order} #{search_node_query}")
+      end
+
+      def next_items
+        self.class.where("element_order > #{self.element_order} #{search_node_query}")
       end
 
       private
@@ -107,6 +116,10 @@ module Acts
         end
         self.element_order = our_new_order
         self.save
+      end
+
+      def re_arrange_list!
+        self.class.update_counters(self.next_items.map(&:id), element_order: -1)
       end
 
       # Builds query part used to fetch only elements from your node (or do nothing)
